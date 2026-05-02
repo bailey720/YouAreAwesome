@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var message = "I Am A Programmer"
+    @State private var imageString = ""
+    @State private var message = ""
     
     var body: some View {
         
         VStack {
             Spacer()
             
-            Image(systemName: "swift")
+            Image(systemName: imageString)
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.orange)
-                .frame(width: 200, height: 200)
             
             Text(message)
                 .font(.largeTitle)
@@ -27,13 +27,13 @@ struct ContentView: View {
             
             Spacer()
             
-            HStack {
-                Button("Awesome!") {
-                    message = "Awesome!"
-                }
-                
-                Button("Great!") {
-                    message = "Great!"
+            Button("Press Me!") {
+                if imageString == "sun.max.fill" {
+                    imageString = "hand.thumbsup"
+                    message = "You are Great!"
+                } else {
+                    imageString = "sun.max.fill"
+                    message = "You are Awesome!"
                 }
             }
             .buttonStyle(.borderedProminent)
