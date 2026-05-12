@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var imageName = ""
+    @State private var lastImageNumber = -1
+    
     @State private var message = ""
+    @State private var lastMessageNumber = -1
     
     var body: some View {
         
@@ -22,7 +25,7 @@ struct ContentView: View {
                 .minimumScaleFactor(0.5)
                 .frame(height: 100)
                 .animation(.easeInOut(duration: 0.15), value: message)
-
+            
             Image(imageName)
                 .resizable()
                 .scaledToFit()
@@ -38,9 +41,21 @@ struct ContentView: View {
                                 "You are Great!",
                                 "Fabulous? That's You!",
                                 "You are Incredible!"]
+                var messageNumber: Int
+                repeat {
+                    messageNumber = Int.random(in: 0...(messages.count - 1))
+                } while messageNumber == lastMessageNumber
                 
-                message = messages[Int.random(in: 0..<messages.count)]
-                imageName = "image\(Int.random(in: 0...9))"
+                var imageNumber: Int
+                repeat {
+                    imageNumber = Int.random(in: 0...9)
+                } while imageNumber == lastImageNumber
+                
+                message = messages[messageNumber]
+                imageName = "image\(imageNumber)"
+                
+                lastMessageNumber = messageNumber
+                lastImageNumber = imageNumber
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
